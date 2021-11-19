@@ -41,6 +41,3 @@ atlassian-ide-plugin.xml
 .clover
 .DS_Store
 
-# Maven wrapper files
-.mvn
-mvnw*
