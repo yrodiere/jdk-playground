@@ -1,4 +1,4 @@
-package org.hibernate.jdk.bugs;
+package org.hibernate.jdk.playground;
 
 import java.sql.Timestamp;
 import java.time.Instant;
