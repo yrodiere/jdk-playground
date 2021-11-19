@@ -1,1 +1,3 @@
-# jdk-bugs
+# jdk-playground
+
+Playground for OpenJDK features.
