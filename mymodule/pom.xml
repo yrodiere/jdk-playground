@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.hibernate.jdk.playground</groupId>
+		<artifactId>jdk-playground</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<groupId>org.hibernate.jdk.playground</groupId>
+	<artifactId>jdk-playground-module</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<properties>
+		<!-- Call ./mvnw -N io.takari:maven:wrapper to update ./mvnw -->
+		<maven.min.version>3.8.3</maven.min.version>
+		<version.compiler.plugin>3.8.1</version.compiler.plugin>
+		<version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
+		<version.enforcer.plugin>3.0.0-M3</version.enforcer.plugin>
+		<version.io.takari.maven>0.7.7</version.io.takari.maven>
+		<version.org.junit>5.8.1</version.org.junit>
+		<version.log4j>1.2.17</version.log4j>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.source>8</maven.compiler.source>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>${version.org.junit}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${version.log4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.compiler.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${version.surefire.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>io.takari</groupId>
+					<artifactId>maven</artifactId>
+					<version>${version.io.takari.maven}</version>
+					<configuration>
+						<maven>${maven.min.version}</maven>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${version.enforcer.plugin}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-common-rules</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireJavaVersion>
+									<version>[17,)</version>
+								</requireJavaVersion>
+								<requireMavenVersion>
+									<version>${maven.min.version}</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- We use Avro-generated DTOs instead of GenericRecord,
+                       because that allows us to write type-safe code
+                       to convert between Hibernate Search objects and Avro objects (DTOs) -->
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.11.0</version>
+				<configuration>
+					<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+					<outputDirectory>${project.basedir}/target/generated-sources/avro/</outputDirectory>
+					<customConversions>org.apache.avro.Conversions$UUIDConversion</customConversions>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>schema</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
