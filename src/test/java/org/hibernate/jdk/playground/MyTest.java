@@ -13,7 +13,7 @@ public class MyTest {
 
 	@Test
 	void synthetic() {
-		assertTrue( TestedClass.InnerClass.class.getConstructors()[0].getParameters()[0].isSynthetic() );
+		assertTrue( TestedEnum.class.getDeclaredConstructors()[0].getParameters()[0].isSynthetic() );
 	}
 
 }
