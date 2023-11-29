@@ -9,7 +9,7 @@ pipeline {
                 axes {
                     axis {
                         name 'JDK_VERSION'
-                        values '17', '20', '21'
+                        values '21', '22'
                     }
                 }
 				tools {
@@ -20,7 +20,7 @@ pipeline {
                     stage('Build and test') {
                         steps {
                             sh """ \
-                                mvn clean install
+                                mvn clean install -e
                             """
                         }
                     }
