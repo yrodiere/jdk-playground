@@ -6,7 +6,7 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
-		<!-- Call ./mvnw -N io.takari:maven:wrapper to update ./mvnw -->
+		<!-- Call ./mvnw wrapper:wrapper to update ./mvnw -->
 		<maven.min.version>3.8.3</maven.min.version>
 		<version.compiler.plugin>3.8.1</version.compiler.plugin>
 		<version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
