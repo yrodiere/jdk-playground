@@ -9,11 +9,11 @@ pipeline {
                 axes {
                     axis {
                         name 'JDK_VERSION'
-                        values '17', '20', '21'
+                        values '17', '21', '25'
                     }
                 }
 				tools {
-					maven 'Apache Maven 3.8'
+					maven 'Apache Maven 3.9'
 					jdk "OpenJDK ${JDK_VERSION} Latest"
 				}
                 stages {
