@@ -13,14 +13,13 @@ pipeline {
                     }
                 }
 				tools {
-					maven 'Apache Maven 3.9'
 					jdk "OpenJDK ${JDK_VERSION} Latest"
 				}
                 stages {
                     stage('Build and test') {
                         steps {
                             sh """ \
-                                mvn clean install
+                                ????
                             """
                         }
                     }
