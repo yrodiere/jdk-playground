@@ -19,7 +19,7 @@ pipeline {
                     stage('Build and test') {
                         steps {
                             sh """ \
-                                ????
+                                ./reproduce.sh
                             """
                         }
                     }
